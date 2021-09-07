@@ -1,0 +1,75 @@
+<div class="col-12">
+    <h1>Список работников</h1>
+    <input type="button" value="Добавить" class="btn btn-success mb-2" (click)="addEmployee()" data-target="#employeeModal" data-toggle="modal" />
+    <table class="table table-hover ov">
+        <thead>
+            <tr>
+                <td>Фамилия</td>
+                <td>Имя</td>
+                <td>Отчество</td>
+                <td>Компания</td>
+                <td>Должность</td>
+                <td>Дата приёма</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let e of employees">
+                <td>{{e.f}}</td>
+                <td>{{e.i}}</td>
+                <td>{{e.o}}</td>
+                <td>{{e.company.name}}</td>
+                <td>{{e.position}}</td>
+                <td>{{e.employmentDate}}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary mr-2" (click)="editEmployee(e)" data-target="#employeeModal" data-toggle="modal">Изменить</button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteEmployee(e)">Удалить</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{employee.f}} {{employee.i}} {{employee.o}}</h5>
+        </div>
+        <div class="modal-body">
+            <div>
+                <div class="form-group">
+                    <label class="col-form-label" for="surnameInput">Фамилия</label>
+                    <input type="text" class="form-control" id="surnameInput" [(ngModel)]="employee.f">
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="firstnameInput">Имя</label>
+                    <input type="text" class="form-control" id="firstnameInput" [(ngModel)]="employee.i">
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="dadnameInput">Отчество</label>
+                    <input type="text" class="form-control" id="dadnameInput" [(ngModel)]="employee.o">
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="companyInput">Компания</label>
+                    <select class="form-control" id="companyInput" [(ngModel)]="employee.company.id">
+                        <option *ngFor="let c of companies" [ngValue]="c.id">{{c.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="positionInput">Должность</label>
+                    <input type="text" class="form-control" id="positionInput" [(ngModel)]="employee.position">
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="dateInput">Дата приёма</label>
+                    <input type="date" class="form-control" id="dateInput" [(ngModel)]="employee.employmentDate">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="save()">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>

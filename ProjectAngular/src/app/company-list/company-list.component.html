@@ -1,0 +1,43 @@
+<div class="col-12">
+    <h1>Список компаний</h1>
+    <input type="button" value="Добавить" class="btn btn-success mb-2" (click)="addCompany()" data-target="#companyModal" data-toggle="modal" />
+    <table class="table table-hover ov">
+        <thead>
+            <tr>
+                <td>Название компании</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of companies">
+                <td>{{c.name}}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary mr-2" (click)="editCompany(c)" data-target="#companyModal" data-toggle="modal">Изменить</button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteCompany(c)">Удалить</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="companyModal" tabindex="-1" role="dialog" aria-labelledby="companyModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{company.name}}</h5>
+        </div>
+        <div class="modal-body">
+            <div>
+                <div class="form-group">
+                    <label class="col-form-label" for="nameInput">Название компании</label>
+                    <input type="text" class="form-control" id="nameInput" [(ngModel)]="company.name">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="save()">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>
